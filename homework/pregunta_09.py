@@ -24,3 +24,25 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+    from itertools import groupby
+    datos=[]
+    with open(r"files\input\data.csv", "r", encoding="utf-8") as archivo:
+        for linea in archivo:
+            campos=linea.strip().split("\t")
+            datos.append(campos)
+
+
+    claves=[]
+    for linea in datos:
+        conjunto=linea[-1].split(",")
+        for clave in conjunto:
+            clave=clave.split(":")
+            claves.append((clave[0],1))
+    claves=sorted(claves, key=lambda x:x[0])
+
+    cantidad_claves={}
+    for key, group in groupby(claves, key=lambda x:x[0]):
+        total=sum(item[1] for item in group)
+        cantidad_claves[key]=total
+
+    return cantidad_claves

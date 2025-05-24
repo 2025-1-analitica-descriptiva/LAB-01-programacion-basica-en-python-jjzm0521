@@ -15,3 +15,23 @@ def pregunta_02():
     [('A', 8), ('B', 7), ('C', 5), ('D', 6), ('E', 14)]
 
     """
+    from itertools import groupby
+
+    datos=[]
+    with open(r"files\input\data.csv", "r", encoding="utf-8") as archivo:
+        for linea in archivo:
+            Campos=linea.strip().split("\t")
+            datos.append(Campos)
+    
+    cantidad_letras=[(linea[0],1) for linea in datos]   
+
+    cantidad_letras=sorted(cantidad_letras, key=lambda x:x[0])
+
+    cantidad_sumada=[]
+    for key, group in groupby(cantidad_letras, key=lambda x:x[0]):
+        total=sum(item[1] for item in group)
+        cantidad_sumada.append((key, total))
+
+    return cantidad_sumada
+
+

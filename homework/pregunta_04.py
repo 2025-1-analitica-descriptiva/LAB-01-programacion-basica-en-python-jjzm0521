@@ -26,3 +26,36 @@ def pregunta_04():
      ('12', 3)]
 
     """
+    from itertools import groupby
+    datos=[]
+    with open(r"files\input\data.csv", "r", encoding="utf-8") as archivo:
+        for linea in archivo:
+            campos=linea.strip().split("\t")
+            datos.append(campos)
+    meses=[]
+    for linea in datos:
+        fechas=linea[2]
+        fecha_g=fechas.split("-")
+        print(linea[2])
+        meses.append((fecha_g[1], 1))
+    
+    meses=sorted(meses, key=lambda x:x[0])
+
+    meses_suma=[]
+    for key, gruop in groupby(meses, key=lambda x:x[0]):
+        total=sum(item[1] for item in gruop)
+        meses_suma.append((key, total))
+
+    return meses_suma
+
+
+
+
+
+
+
+
+
+
+
+

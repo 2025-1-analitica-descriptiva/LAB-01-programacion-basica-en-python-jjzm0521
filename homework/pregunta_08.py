@@ -27,3 +27,28 @@ def pregunta_08():
      (9, ['A', 'B', 'C', 'E'])]
 
     """
+    from itertools import groupby
+    datos=[]
+    with open(r"files\input\data.csv","r", encoding="utf-8") as archivo:
+        for linea in archivo:
+            campos=linea.strip().split("\t")
+            datos.append(campos)
+
+    columnas=[]
+    for linea in datos:
+        columnas.append((int(linea[1]), linea[0]))
+    
+    columnas=sorted(columnas, key=lambda x:x[1])
+    columnas=sorted(columnas, key=lambda x:x[0])
+
+    letras_por_numero=[]
+    for key, group in groupby(columnas, key=lambda x:x[0]):
+        lista_letra=[]
+        for item in group:
+            if item[1] not in lista_letra:
+                lista_letra.append(item[1])
+        
+
+        letras_por_numero.append((key,lista_letra))
+    
+    return letras_por_numero

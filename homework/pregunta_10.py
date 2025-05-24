@@ -20,3 +20,19 @@ def pregunta_10():
 
 
     """
+    from itertools import groupby
+    datos=[]
+    with open(r"files\input\data.csv", "r", encoding="utf-8") as archivo:
+        for linea in archivo:
+            campos=linea.strip().split("\t")
+            datos.append(campos)
+    
+    solucion=[]
+    for lista in datos:
+        letra=lista[0]
+        columna_4=lista[3].split(",")
+        columna_5=lista[4].split(",")
+        solucion.append((letra,len(columna_4),len(columna_5)))
+
+    return solucion
+

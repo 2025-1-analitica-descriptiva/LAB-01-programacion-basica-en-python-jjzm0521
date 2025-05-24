@@ -9,8 +9,20 @@ utilizar pandas, numpy o scipy.
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
-
+    
     Rta/
     214
 
     """
+    datos=[]
+    with open("files/input/data.csv", "r", encoding="utf-8") as archivo:
+        for linea in archivo:
+            campos=linea.strip().split("\t")
+            datos.append(campos)
+
+    suma=0
+    for linea in datos:
+        suma=suma+int(linea[1])
+
+    return suma
+

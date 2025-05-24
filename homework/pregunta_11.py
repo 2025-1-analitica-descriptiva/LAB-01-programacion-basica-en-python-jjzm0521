@@ -16,3 +16,26 @@ def pregunta_11():
 
 
     """
+    from itertools import groupby
+    datos=[]
+    with open(r"files\input\data.csv", "r", encoding="utf-8") as archivo:
+        for linea in archivo:
+            campos=linea.strip().split("\t")
+            datos.append(campos)
+
+
+    letras_numero=[]
+    for linea in datos:
+        letras=linea[3]
+        letras=letras.strip().split(",")
+        for letra in letras:
+            letras_numero.append((letra,int(linea[1])))
+
+    letras_numero = sorted(letras_numero, key=lambda x: x[0])
+
+    
+    dic_cantidad={}
+    for key, group in groupby(letras_numero, key=lambda x:x[0]):
+            total=sum(item[1] for item in group)
+            dic_cantidad[key]=total
+    return dic_cantidad
