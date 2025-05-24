@@ -28,7 +28,7 @@ def pregunta_04():
     """
     from itertools import groupby
     datos=[]
-    with open(r"files\input\data.csv", "r", encoding="utf-8") as archivo:
+    with open("files\input\data.csv", "r", encoding="utf-8") as archivo:
         for linea in archivo:
             campos=linea.strip().split("\t")
             datos.append(campos)
